@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/themes/hot-sneaks/jquery-ui.css" rel="stylesheet">
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+	<style>
+		table,
+		th,
+		td {
+			border: 1px solid black;
+		}
+	</style>
+</head>
+
+<body>
+
+	<h2>HTML Forms</h2>
+
+	<form action="EditBook.php" method="post">
+		<table>
+			<tbody>
+				<tr>
+					<td>ISBN</td>
+					<td><span id="IisbnValueSpan"><?php
+						echo $IisbnValue;
+						?></span><input type=hidden  id="IisbnValueId" name="IisbnValue" value=<?php
+						echo $IisbnValue;
+						?>><br></td>
+				</tr>
+				<tr>
+					<td>出版社</td>
+					<td><input type="text" id="VersionValueId" name="VersionValue" value=<?php
+						echo $VersionValue;
+						?>><br><br>
+					</td>
+				</tr>
+				<tr>
+					<td>書名</td>
+					<td><input type="text" id="BookNameValueId" name="BookNameValue" value=<?php
+						echo $BookNameValue;
+						?>><br><br>
+					</td>
+				</tr>
+				<tr>
+					<td>作者</td>
+					<td><input type="text" id="AuthorValueId" name="AuthorValue" value=<?php
+						echo $AuthorValue;
+						?>><br><br>
+					</td>
+				</tr>
+				<tr>
+					<td>定價</td>
+					<td><input type="text" id="PriceValueId" name="PriceValue" value=<?php
+						echo $PriceValue;
+						?>><br><br>
+					</td>
+				</tr>
+				<tr>
+					<td>發行日</td>
+					<td><input type="date" id="OutDateValueId" name="OutDateValue" value=<?php
+						echo $OutDateValue;
+						?>><br><br>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<input type="text" id="BookSortValueId" name="BookSortValue" value=<?php
+		echo $BookSortValue;
+		?>>
+		<input type="text" id="SortDirectioiValueId" name="SortDirectioiValue" value=<?php
+		echo $SortDirectioiValue;
+		?>>
+		<!-- <label for="fname">ISBN</label><br>
+		<input type="text" id="IisbnValueId" name="IisbnValue"><br>
+		<label for="lname">出版社</label><br>
+		<input type="text" id="VersionValueId" name="VersionValue"><br><br>
+		<label for="lname">書名</label><br>
+		<input type="text" id="BookNameValueId" name="BookNameValue"><br><br>
+		<label for="lname">作者:</label><br>
+		<input type="text" id="AuthorValueId" name="AuthorValue"><br><br>
+		<label for="lname">定價:</label><br>
+		<input type="text" id="PriceValueId" name="PriceValue"><br><br>
+		<label for="lname">發行日:</label><br>
+		<input type="date" id="OutDateValueId" name="OutDateValue"><br><br> -->
+		<input type="submit" value="Submit">
+	</form>
+
+</body>
+<script>
+	function getQueryVariable(variable) {
+		var query = window.location.search.substring(1);
+		var vars = query.split("&");
+		for (var i = 0; i < vars.length; i++) {
+			var pair = vars[i].split("=");
+			if (pair[0] == variable) { return pair[1]; }
+		}
+		return (false);
+	}
+	$("document").ready(function () {
+		
+		var ISBNid = decodeURI(getQueryVariable("ISBNid"))
+		var Versionid = decodeURI(getQueryVariable("Versionid"))
+		var BookNameid = decodeURI(getQueryVariable("BookNameid"))
+		var Authorid = decodeURI(getQueryVariable("Authorid"))
+		var Priceid = decodeURI(getQueryVariable("Priceid"))
+		var OutDateid = decodeURI(getQueryVariable("OutDateid"))
+		var BookSortid = decodeURI(getQueryVariable("BookSortid"))
+		var SortDirectioiId = decodeURI(getQueryVariable("SortDirectioiId"))
+		// sessionStorage.setItem('ISBNid', ISBNid);
+		// sessionStorage.setItem('Versionid', Versionid);
+		// sessionStorage.setItem('BookNameid', BookNameid);
+		// sessionStorage.setItem('Authorid', Authorid);
+		// sessionStorage.setItem('Priceid', Priceid);
+		// sessionStorage.setItem('OutDateid', OutDateid);
+		// localStorage.setItem("ISBNid", ISBNid)
+		// localStorage.setItem("Versionid", Versionid)
+		// localStorage.setItem("BookNameid", BookNameid)
+		// localStorage.setItem("Authorid", Authorid)
+		// localStorage.setItem("Priceid", Priceid)
+		// localStorage.setItem("OutDateid", OutDateid)
+		console.log(ISBNid)
+		if(ISBNid != 'false'){
+			$("#IisbnValueSpan").text(ISBNid)
+			$("#IisbnValueId").val(ISBNid)
+		}
+		if(Versionid != 'false'){
+			$("#VersionValueId").val(Versionid)
+		}
+		if(BookNameid != 'false'){
+			$("#BookNameValueId").val(BookNameid)
+		}
+		if(Authorid!='false'){
+			$("#AuthorValueId").val(Authorid)
+		}
+		if(Priceid!='false'){
+			$("#PriceValueId").val(Priceid)
+		}
+		if(OutDateid!='false'){
+			$("#OutDateValueId").val(OutDateid)
+		}
+		if(BookSortid!='false'){
+			$("#BookSortValueId").val(BookSortid)
+		}
+		if(SortDirectioiId!='false'){
+			$("#SortDirectioiValueId").val(SortDirectioiId)
+		}
+
+	})
+</script>
+
+</html>
