@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+
+
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/themes/hot-sneaks/jquery-ui.css" rel="stylesheet">
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+	<style>
+		body{
+			font-family:DFKai-sb;
+		}
+		#ExportStyle {
+			text-align: right;
+		}
+
+		#FormStyle {
+			text-align: right;
+		}
+
+		#sitebody {
+			/* width:600px; */
+			margin: 0 auto;
+			font-size: 13px;
+		}
+
+		#PageForm {
+			float: right;
+		}
+
+		#header {
+			background-color: #FFD4D4;
+			height: 80px;
+			/* text-align:center; */
+			line-height: 80px;
+		}
+
+		#BookAdd {
+			text-align: center;
+		}
+
+		#content {
+			float: right;
+			background-color: white;
+		}
+		.EditBut{
+			font-family:DFKai-sb;
+		}
+		.AddBut{
+			font-family:DFKai-sb;
+		}
+		.DELBut{
+			font-family:DFKai-sb;
+		}
+		#BookSort2{
+			font-family:DFKai-sb;
+		}
+		.SelectClass{
+			font-family:DFKai-sb;
+		}
+		.ExpotTtitleStyle{
+
+			color: #003399;
+			font-size: 13px;
+			font-weight: bold;
+		}
+		.SortTitleStyle{
+			font-weight:bold;
+			color: #003399;
+			font-size: 13px;
+			margin-right:10px;
+		}
+		option{
+			color:#003399;
+			font-size: 13px;
+		}
+		th,
+		td {
+			border: 1px solid #BBB;
+			text-align: center;
+		}
+		th{
+			font-size: 16px;
+		}
+		td{
+			font-size: 14px;
+		}
+		table {
+			border: 5px solid #BBB;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="ExportStyle">
+		<span class="ExpotTtitleStyle">匯出方式</span>
+		<select class="SelectClass">
+			<option value="">
+				請選擇
+			</option>
+			<option value="ExportValueAll">
+				匯出全部
+			</option>
+			<option value="ExportValueThisPage">
+				匯出本頁
+			</option>
+			<option value="ExportValueNormal">
+				匯出選取項目
+			</option>
+		</select>
+		<img id="BookexportBut" src="./images/export.png">
+	</div>
+	<div id="sitebody">
+
+		<div id="header">
+			<div id="FormStyle">
+				<form id="PageForm" method="get" action="index.php">
+					<a style="margin-right:5px" href=index.php?BookSortAndDirection=<?php echo
+						$BookSortAndDirection."&Page=1"?>>|<</a>
+							<a style="margin-right:5px" href=index.php?BookSortAndDirection=<?php echo
+								$BookSortAndDirection."&Page=".($page-1)?>
+							>
+								<< </a>
+									第
+									<span style="font-size: 13px;color: #003399; font-weight:bold;">
+										<?php echo $page?>
+									</span>
+									頁
+										<a style="margin-right:5px" href=index.php?BookSortAndDirection=<?php echo
+										$BookSortAndDirection."&Page=".($page+1)?>>>>
+									</a>
+
+									<a id="LastPageAppear" style="margin-right:17px" href=index.php?BookSortAndDirection=<?php echo
+										$BookSortAndDirection."&Page=".$LastPage?>>>|
+									</a>
+									頁碼:
+									<input style="color: #003399; font-size: 13px;" type="text" name=Page value=<?php echo @$page;?>>
+									<input type="hidden" name=BookSortAndDirection value=<?php echo
+										$BookSortAndDirection;?>>
+									<img id="GoId" src="./images/go.jpg" >
+				</form>
+				<form method="get" id="myForm" action="index.php">
+					<input type=hidden id="DeleteDataId" name=DeleteData />
+					<input type=hidden id="ExportIsbnId" name=ExportIsbnName />
+					<input type=hidden id="ExportWay" name=ExportWayName />
+					<input type="hidden" id="PageId" name="Page" value=<?php echo $page?>>
+					<span  class="SortTitleStyle">排序方式</span>
+
+					<select style="margin-right:10px" id="BookSort2" name="BookSortAndDirection"
+						onchange="this.form.submit()">
+						<option value="">請選擇</option>
+						<option value="ISBN:ASC" <?php if($BookSortAndDirection=="ISBN:ASC" ) {echo "selected" ;}?>
+							>ISBN:ASC</option>
+						<option value="ISBN:DESC" <?php if($BookSortAndDirection=="ISBN:DESC" ) {echo "selected" ;}?>
+							>ISBN:DESC</option>
+
+						<option value="Version:ASC" <?php if($BookSortAndDirection=="Version:ASC" ) {echo "selected"
+							;}?>>出版社:ASC</option>
+						<option value="Version:DESC" <?php if($BookSortAndDirection=="Version:DESC" ) {echo "selected"
+							;}?>>出版社:DESC</option>
+						<option value="BookName:ASC" <?php if($BookSortAndDirection=="BookName:ASC" ) {echo "selected"
+							;}?>>書名:ASC</option>
+
+						<option value="BookName:DESC" <?php if($BookSortAndDirection=="BookName:DESC" ) {echo "selected"
+							;}?> >
+							書名:DESC
+						</option>
+						<option value="Author:ASC" <?php if($BookSortAndDirection=="Author:ASC" ) {echo "selected" ;}?>
+							>作者:ASC</option>
+						<option value="Author:DESC" <?php if($BookSortAndDirection=="Author:DESC" ) {echo "selected"
+							;}?>>作者:DESC</option>
+						<option value="Price:ASC" <?php if($BookSortAndDirection=="Price:ASC" ) {echo "selected" ;}?> >
+							定價:ASC
+						</option>
+						<option value="Price:DESC" <?php if($BookSortAndDirection=="Price:DESC" ) {echo "selected" ;}?>
+							>定價:DESC</option>
+						<option value="OutDate:ASC" <?php if($BookSortAndDirection=="OutDate:ASC" ) {echo "selected"
+							;}?>>發行日:ASC</option>
+						<option value="OutDate:DESC" <?php if($BookSortAndDirection=="OutDate:DESC" ) {echo "selected"
+							;}?>>發行日:DESC</option>
+					</select>
+				</form>
+
+			</div>
+		</div>
+		<div id="content">
+			<table id="BookTable">
+				<thead>
+					<tr>
+						<th><input type="checkbox" id="CheckAllId">全選</th>
+						<th>ISBN</th>
+						<th>出版社</th>
+						<th>書名</th>
+						<th>作者</th>
+						<th>定價</th>
+						<th>發行日</th>
+						<th>編輯/刪除</th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php
+					for($x=0;$x<count($showBook);$x++){
+						$ID = $showBook[$x]['ISBN'];
+						$Phone = $showBook[$x]['Phone'];
+						$Address = $showBook[$x]['Address'];
+						echo "<tr>";
+						echo "<td><input type=checkbox class=CheckClass  value=$ID></td>";
+						foreach($showBook[$x] as  $key=>$x_value) {
+							if($key == 'Version'){
+								echo "<td data-phone='$Phone' data-address='$Address' class='Version'>
+									".$x_value."
+										</td>";
+							}
+							else if($key != 'Phone' && $key!='Address'){
+								echo "<td>".$x_value."</td>";
+							}
+						}
+						echo "<td><button style='background-color: #FF9900;' type=button class=EditBut  value=$ID>編輯</button>"."<button style='background-color: #FF0000;' type=button class=DELBut  >刪除</button></td>";
+						echo "</tr>";
+					}
+					?>
+				</tbody>
+			</table>
+			<div id="BookAdd">
+				<button class=AddBut style="background-color: #66FF99;">新增</button>
+			</div>
+
+		</div>
+
+		<div id='Pagetip' style='position:absolute;  left:0px; top:0px; height:10px;width:35px; z-index:1; background-color: #F1F1F1; border: 2px solid #000; overflow: visible;visibility: hidden;font-size:13px;padding:12px;color:#333333;font-weight:bold;'>第<?php echo $LastPage?>頁</div>
+		<div id="Header2">
+
+		</div>
+
+
+
+</body>
+<script type="text/javascript" src="./js/index.js">
+
+</script>
+
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+</head>
+<body
+<table width="100%" border="0" cellspacing="0" cellpadding="0" background="#F7F7F0">
+	<tr height="25">
+	<td background="images/line-dot.gif" height="20" align="left"><IMG height="5" src="images/dot2.gif" width="5">
+	<a 
+	onmousemove="showtip('<b>標題：</b><br>我是提是訊息<br>')" 
+	onmouseout=hidetip() 
+	href='Common/NewsDetails.aspx?id=1035'
+	target=_blank>
+	大家好
+	</a>
+	
+	</td>
+	<td>
+		<a 
+	onmousemove="showtip('<b>標題：</b><br>我是提<br>')" 
+	onmouseout=hidetip() 
+	href='Common/NewsDetails.aspx?id=1035'
+	target=_blank>
+	大家好2
+	</a>
+	</td>
+	</tr>
+	<tr>
+	<td background="images/point_h.gif" height="1"></td>
+	</tr>
+</table>
+
+</body>
+<script>
+	document.write("<div id='tip' style='position:absolute; width:300px; z-index:1; background-color: #F1F1F1; border: 1px solid gray; overflow: visible;visibility: hidden;font-size:12px;padding:12px;color:#333333'></div>")
+	function showtip(w){
+		console.log(event)
+	var x=event.pageX;
+	var y=event.pageY;
+	tip.innerHTML=w;
+	tip.style.visibility="visible";
+	tip.style.left=x +10;
+	tip.style.pixelTop=y+ document.body.scrollTop+ 10;
+	}
+	function hidetip(){
+	tip.style.innerHTML=""
+	tip.style.visibility="hidden";
+	}
+</script>
+</html>
