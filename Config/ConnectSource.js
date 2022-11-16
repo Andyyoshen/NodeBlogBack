@@ -1,7 +1,7 @@
 var mysql = require('mysql');
 var address = require('../config/db')
 //建立連線
-var connection = mysql.createConnection(address);
+var connection = mysql.createPool(address);
 
 module.exports.ConSql2 =  function (sql,post, callback) { 
     connection.query(sql,post, function (err, rows, fields) {

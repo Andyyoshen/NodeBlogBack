@@ -20,7 +20,7 @@ module.exports.DeleteDB_Article_Title = async function(arry){
 }
 //[文章按照日期排序]
 module.exports.GetTopNewDB_Article_Title = async function(){
-    var cmd = `SELECT * FROM personallog.article_titlepage order by date_article_titlepage;`
+    var cmd = `SELECT * FROM personallog.article_titlepage order by id_article_titlepage DESC;`
     let dataList = from_ConnectionSouece.ConSql3(cmd,null)
     return dataList;
 }

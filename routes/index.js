@@ -9,6 +9,7 @@ var from_ApiCtrl_Article_GetDropDownList = require('../Modal/ApiCtrl/GetDropDown
 var from_LogicFun = require('../Modal/General/LogicFun')
 var from_GetArticle_Title_Page = require('../Modal/ApiCtrl/GetArticle_Title_Page')
 var from_UpdateArticle_Title_Page = require('../Modal/ApiCtrl/UpdataArticle_Title_Page')
+var from_RecordUserIP = require('../Modal/ApiCtrl/RecordUsertIP')
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
@@ -359,11 +360,34 @@ router.post('/SearchArticle' , async function(req, res, next){
     }
   }
 })
+//[紀錄client Ip Address]
+router.post('/InsertClientIp', async function(req, res, next) {
+  try{
+  let IsVerifyDate_result =  await from_LogicFun.IsVerifyDate(req.body.Token_data.Token)
+    if(IsVerifyDate_result){
+      let InsertClientIP_result = await from_RecordUserIP.InsertClientIP(req.body.U_data)
+      if(InsertClientIP_result != false){
+        res.send({
+          Status:true,
+          Data:[],
+          Msg:'sucess'
+        });
+      }
+      else{
+        res.send({
+          Status:false,
+          Data:"",
+          Msg:'sucess'
+        });
+      }
+    }
+  }
+  catch(err){
+    console.log(err)
+  }
+});
 //[article_titlepage_id抓文章內容]
 router.post('/GetArticleContent', async function(req, res, next) {
-  console.log("大家好2")
-  console.log(req.body)
-  console.log("大家好")
   try{
   let IsVerifyDate_result =  await from_LogicFun.IsVerifyDate(req.body.Token_data.Token)
     if(IsVerifyDate_result){
@@ -390,8 +414,6 @@ router.post('/GetArticleContent', async function(req, res, next) {
 });
 //[上傳圖片轉換]
 router.post('/TranceLateImage',upload.single('file'),async function(req, res, next) {
-  console.log(req.body)
-  console.log(req.file)
   if(req.file){
       // 讀傳過來的檔案
     fs.readFile(req.file.path, (err, data) => {

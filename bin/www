@@ -7,6 +7,13 @@
 var app = require('../app');
 var debug = require('debug')('personallog:server');
 var http = require('http');
+var fs = require('fs'); //要抓SSL的檔案
+//暫時放著
+//var https = require('http');
+
+
+
+
 
 /**
  * Get port from environment and store in Express.
@@ -21,11 +28,29 @@ app.set('port', port);
 
 var server = http.createServer(app);
 
+//暫時放著
+// var https_options = {
+
+//   key: fs.readFileSync("/etc/letsencrypt/live/andyblog.tw/privkey.pem",'utf8'),
+
+//   cert: fs.readFileSync("/etc/letsencrypt/live/andyblog.tw/cert.pem",'utf8'),
+//   ca: fs.readFileSync("/etc/letsencrypt/live/andyblog.tw/chain.pem",'utf8'),
+// };
+// app.use((req, res) => {
+// console.log(req);
+//         res.send('Hello there !');
+// });
+
+// var servers = https.createServer(https_options,app)
+
 /**
  * Listen on provided port, on all network interfaces.
  */
 
-server.listen(port);
+server.listen(port,function(err){
+  console.log(port);
+  console.log("server is run");
+});
 server.on('error', onError);
 server.on('listening', onListening);
 

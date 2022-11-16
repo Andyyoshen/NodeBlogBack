@@ -42,7 +42,8 @@ module.exports.GetDB_Article_TitlePage_JOIN_Dropdown_List =  function(arry){
                 FROM personallog.dropdown_list
                 INNER JOIN personallog.article_titlepage
                 ON personallog.dropdown_list.idDropDown_list = personallog.article_titlepage.tag_article_titlepage
-                WHERE personallog.article_titlepage.type_article_titlepage = ?` 
+                WHERE personallog.article_titlepage.type_article_titlepage = ?
+                ORDER BY id_article_titlepage DESC` 
     let  dataList =  from_ConnectionSouece.ConSql3(cmd,arry)
     return dataList
 }

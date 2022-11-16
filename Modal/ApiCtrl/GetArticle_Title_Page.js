@@ -39,7 +39,7 @@ module.exports.GetTopNew_Artitcle_Title = async function(){
             GetTopNewDB_Article_Title_result.forEach(num=>{
                 num.img_article_titlepage = SelectDB_GeneralWeb_result[0].content_general_web+num.img_article_titlepage
             })
-             return GetTopNewDB_Article_Title_result.slice(-3)
+             return GetTopNewDB_Article_Title_result.slice(0,3)
         }
         else{
             return false

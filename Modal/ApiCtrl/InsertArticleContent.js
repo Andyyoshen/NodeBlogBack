@@ -124,7 +124,7 @@ module.exports.UpdateArticleContent = async function(obj){
 }
 //[不一條件抓封面]
 module.exports.Get_Article_TitlePageNoWhere = async function(obj){
-    
+    console.log("大家好")
     try{
         var DTO_trance = Object.values(obj)
         let GetDB_Article_TitlePage_result =await from_DRCtrl_Article.GetDB_Article_TitlePage_JOIN_Dropdown_List_NoWHERE(null)
